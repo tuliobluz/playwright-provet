@@ -19,6 +19,8 @@ exports.DemoPage = class DemoPage {
     this.submitButton = page.getByRole('button', { name: 'Submit' });
     this.bannerSuccessPage = page.locator('.banner-content.page-center');
     this.brochureDownload = (url) => page.locator(`a[href="${url}"]`);
+    this.getElementsByText = (text) => page.getByText(text);
+    this.requiredMessages = '.hs-error-msgs';
   }
 
   async goto(path) {
@@ -29,7 +31,7 @@ exports.DemoPage = class DemoPage {
     await this.cookieConfirmation.click();
   }
 
-  async fillform(data, email) {
+  async fillForm(data, email) {
     await this.fisrtName.fill(data.FIRST_NAME);
     await this.lastName.fill(data.LAST_NAME);
     await this.clinicName.fill(data.CLINIC_NAME);
@@ -45,5 +47,10 @@ exports.DemoPage = class DemoPage {
 
   async clickSubmitButton() {
     await this.submitButton.first().click();
+  }
+
+  async getRequiredMsg() {
+    const elements = await this.page.$$(this.requiredMessages); // find all h1 elements on the page
+    return elements.length;
   }
 };
