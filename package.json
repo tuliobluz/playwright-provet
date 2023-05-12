@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
-  "keywords": [],
+  "scripts": {
+    "e2e:allTests": "npx playwright test",
+    "e2e:openReport": "npx playwright show-report"
+  },
+  "keywords": ["provet", "playwright", "ui", "automation_testing"],
   "author": "Tulio Bandeira Luz",
   "license": "ISC",
   "devDependencies": {
