@@ -22,7 +22,7 @@ The following is the suggested folder structure for Playwright tests:
     * `e2e`: contains the specifications for the tests.
         * `demo.spec.js`: a sample specification.
     * `helpers`: contains helper functions.
-    * `pages`: contains data located in a file.
+    * `pages`: contains the page objects to be used on the spec tests
     * `resources`: contains test data and files to be used in tests.
 
 ## How to Set Up

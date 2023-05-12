@@ -19,7 +19,6 @@ module.exports = defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "https://www.provet.cloud/",
-    viewport: { width: 1360, height: 1024 },
     headless: true,
     screenshot: "only-on-failure",
     ignoreHTTPSErrors: true,
