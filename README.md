@@ -80,6 +80,8 @@ In the action summary, you can download the artifacts and view the HTML report w
 
 The project uses `eslint` for linting. 
 
+To run lint: `npm run lint`
+
 In the future, you can add component tests that use the front-end source code by following the steps outlined in [Playwright's documentation](https://playwright.dev/docs/test-components). 
 
 To run the component tests, use the command `npm run components:tests`.
