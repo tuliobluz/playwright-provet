@@ -1,17 +1,18 @@
-const { test, expect, Page } = require('@playwright/test');
-const { DemoPage } = require('../pages/demopage');
-const testData = require('../resources/testData').testData;
-const { messages, urls } = require('../resources/testData');
-const generateEmail = require('../helpers/emailGenerator').default;
+const { test, expect, Page } = require("@playwright/test");
+const { DemoPage } = require("../pages/demopage");
+const testData = require("../resources/testData").testData;
+const { messages, urls } = require("../resources/testData");
+const generateEmail = require("../helpers/emailGenerator").default;
 
-test.describe('Provet Cloud Request Demo', () => {
+test.describe("provet Cloud Request Demo @e2e", () => {
   let page = Page;
   test.beforeEach(async ({ browser }) => {
     page = await browser.newPage();
+    const demoPage = new DemoPage(page);
     await page.goto(urls.REQUEST_DEMO);
+    await demoPage.acceptCookies();
   });
-
-  test('Success Contact', async ({}) => {
+  test("success Contact", async () => {
     const email = generateEmail(testData);
     const demoPage = new DemoPage(page);
 
@@ -19,15 +20,15 @@ test.describe('Provet Cloud Request Demo', () => {
     await demoPage.acceptLegalConsent();
     await demoPage.clickSubmitButton();
 
-    expect(demoPage.bannerSuccessPage).toHaveText(messages.SUCCESS_CONTACT);
-    expect(demoPage.brochureDownload(urls.BROCHURE)).toHaveText(messages.BROCHURE);
+    await expect(demoPage.bannerSuccessPage).toHaveText(messages.SUCCESS_CONTACT);
+    await expect(demoPage.brochureDownload(urls.BROCHURE)).toHaveText(messages.BROCHURE);
   });
 
-  test('Required fields', async ({}) => {
+  test("required fields", async () => {
     const demoPage = new DemoPage(page);
     await demoPage.clickSubmitButton();
 
     const requiredMsgQnty = await demoPage.getRequiredMsg();
-    expect(requiredMsgQnty).toHaveLength(7);
+    expect(requiredMsgQnty).toHaveLength("8");
   });
 });

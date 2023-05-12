@@ -1,0 +1,38 @@
+{
+  "extends": ["plugin:playwright/playwright-test", "eslint:recommended"],
+  "globals": {
+      "_": "readonly"
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2022
+  },
+  "rules": {
+    "playwright/prefer-lowercase-title": "warn",
+    "playwright/prefer-to-be": "warn",
+    "playwright/prefer-to-have-length": "warn",
+    "playwright/no-skipped-test": "off",
+    "playwright/prefer-strict-equal": "warn",
+    "playwright/max-nested-describe": ["warn", { "max": 1 }],
+    // enable additional rules
+    "indent": ["error", 2],
+    "no-undef": "off",
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+
+    // override configuration set by extending "eslint:recommended"
+    "no-empty": "warn",
+    "no-cond-assign": ["error", "always"],
+
+    // disable rules from base configurations
+     "for-direction": "off",
+    "playwright/no-restricted-matchers": [
+      "error",
+      {
+        "toBeFalsy": "Use `toBe(false)` instead.",
+        "not": null
+      }
+    ]
+  }
+}

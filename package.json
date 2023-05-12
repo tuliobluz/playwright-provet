@@ -4,13 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "e2e:allTests": "npx playwright test",
-    "e2e:openReport": "npx playwright show-report"
+    "e2e:tests": "npx playwright test --grep @e2e",
+    "components:tests": "npx playwright test --grep @component",
+    "e2e:openReport": "npx playwright show-report",
+    "lint": "eslint ."
   },
-  "keywords": ["provet", "playwright", "ui", "automation_testing"],
+  "keywords": [
+    "provet",
+    "playwright",
+    "ui",
+    "automation_testing"
+  ],
   "author": "Tulio Bandeira Luz",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.33.0"
+  },
+  "dependencies": {
+    "eslint-plugin-playwright": "^0.12.0"
   }
 }
