@@ -1,19 +1,19 @@
-// @ts-check
 const { test, expect } = require('@playwright/test');
+const { DemoPage } = require('../pages/demopage');
+const testDataResource = require('../resources/testData');
+const generateEmail = require('../helpers/emailGenerator').default;
 
-test('has text', async ({ page }) => {
-  await page.goto('/request-demo');
+const testData = testDataResource.testData;
+const urls = testDataResource.urls;
+const messages = testDataResource.messages;
 
-  await page.locator('id=hs-eu-confirmation-button').click();
-
-  await page.getByLabel('First name').fill('secret');
-  await page.getByLabel('Last name').fill('secret');
-  await page.getByLabel('Clinic name').fill('secret');
-  await page.locator('.free-trial .hs_email input').fill('secretsecrett@gmail.com');
-  await page.getByLabel('Phone number').fill('+33 177 444 4444');
-  await page.getByLabel('Job Title').fill('QA Engineer');
-  await page.getByLabel('Country').selectOption('Germany');
-  // Expect a title "to contain" a substring.
-  await page.getByLabel('By submitting you accept our ').click();
-  await page.getByRole('button', { name: 'Submit' }).click({ force: true });
+test('Success Contact Provet Cloud', async ({ page }) => {
+  const demoPage = new DemoPage(page);
+  const email = generateEmail(testData);
+  await demoPage.goto(urls.REQUEST_DEMO);
+  await demoPage.fillform(testData, email);
+  await demoPage.acceptLegalConsent();
+  await demoPage.clickSubmitButton();
+  expect(demoPage.bannerSuccessPage).toHaveText(messages.SUCCESS_CONTACT);
+  expect(demoPage.bannerSuccessPage(urls.BROCHURE)).toHaveText(messages.BROCHURE);
 });
