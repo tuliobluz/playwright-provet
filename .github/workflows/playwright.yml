@@ -6,7 +6,7 @@ on:
     branches: [main, master]
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,7 +20,7 @@ jobs:
       - name: Lint check
         run: npm run lint
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npm run e2e:tests
       - uses: actions/upload-artifact@v3
         if: always()
         with:
